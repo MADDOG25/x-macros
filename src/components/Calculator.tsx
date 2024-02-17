@@ -14,10 +14,8 @@ const Calculator: React.FC = () => {
   const [lessWeight, setLessWeight] = useState<number>();
   const [manteinWeight, setManteinWeight] = useState<number>();
 
-
   //FUNCIONES PARA CALCULAR LOS MACROS SEGUN FORMULAS
   const calculateMacros = () => {
-    
     const totalCalories = weight * 25;
     const proteinPercentage = gender === "hombre" ? 0.3 : 0.25;
     const carbsPercentage = 0.5;
@@ -27,7 +25,10 @@ const Calculator: React.FC = () => {
     const carbsGrams = (totalCalories * carbsPercentage) / 4;
     const fatGrams = (totalCalories * fatPercentage) / 9;
 
-    const tmb = gender === "hombre" ? ((10 * weight) + (6.25 * height) - (5 * age) + 5 ) : ((10 * weight) + (6.25 * height) - (5 * age) - 161 );
+    const tmb =
+      gender === "hombre"
+        ? 10 * weight + 6.25 * height - 5 * age + 5
+        : 10 * weight + 6.25 * height - 5 * age - 161;
     const max = tmb + 500;
     const min = tmb - 500;
 
@@ -38,14 +39,11 @@ const Calculator: React.FC = () => {
     setMoreWeight(max);
     setLessWeight(min);
     setManteinWeight(tmb);
-
   };
 
   return (
     <div className="max-w-3xl mx-auto mt-8 p-4 rounded-lg shadow">
       <h2 className="text-2xl font-bold mb-4">Calculadora de Macros</h2>
-
-      {/* FORMULA PARA INGRESAR DATOS */}
 
       <div className="grid grid-cols-4 gap-y-6 justify-center items-center">
         <div className="flex flex-col justify-center items-center gap-2 w-full">
@@ -156,10 +154,7 @@ const Calculator: React.FC = () => {
         <p>Carbohidratos: {carbs.toFixed(2)}g</p>
         <p>Grasas: {fats.toFixed(2)}g</p>
       </div>
-      {/* <div className="mt-4">
-        <h3 className="font-bold">Calorias:</h3>
-        <p>Calorias: {tmb.toFixed(2)}g</p>
-      </div> */}
+      {/* IMPRIMIR CALORIAS DE AUMENTO, DISMINUCION Y MANTENIMIENTO */}
     </div>
   );
 };
